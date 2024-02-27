@@ -31,3 +31,5 @@ jobs:
           source_branch: "main"
           destination_branch: "main"
           github_token: "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"
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
