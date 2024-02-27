@@ -27,11 +27,10 @@ jobs:
       - name: repo-sync
         uses: repo-sync/github-sync@v2
         with:
-          # source_repo: "https://${{ secrets.PAT }}@github.jp.klab.com/zhang-m/migration-test.git"
-          source_repo: "git@github.jp.klab.com/zhang-m/migration-test.git"
+          source_repo: "https://${{ secrets.PAT }}@github.jp.klab.com/zhang-m/migration-test.git"
           source_branch: "main"
           destination_branch: "main"
           github_token: "${{ secrets.PAT }}"
           # github_token: "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"
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        # env:
+        #   SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
