@@ -25,8 +25,7 @@ jobs:
       - name: repo-sync
         uses: repo-sync/github-sync@v2
         with:
-          source_repo: "https://github.com/zh-ml/migration"
+          source_repo: "https://github.jp.klab.com/zhang-m/migration-test"
           source_branch: "main"
-          destination_repo: "https://github.jp.klab.com/zhang-m/migration-test"
           destination_branch: "main"
           github_token: ${{ secrets.PAT }}
