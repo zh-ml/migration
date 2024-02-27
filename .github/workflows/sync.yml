@@ -24,12 +24,23 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: repo-sync
-        uses: repo-sync/github-sync@v2
+      # - name: repo-sync
+      #   uses: repo-sync/github-sync@v2
+      #   with:
+      #     source_repo: "https://${{ secrets.PAT }}@github.jp.klab.com/zhang-m/migration-test.git"
+      #     source_branch: "main"
+      #     destination_branch: "main"
+      #     github_token: "${{ secrets.SELF_TOKEN }}"
+      #   # env:
+      #   #   SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: git-sync
+        uses: wei/git-sync@v3
         with:
-          source_repo: "https://${{ secrets.PAT }}@github.jp.klab.com/zhang-m/migration-test.git"
+          source_repo: "https://zhang-m:${{ secrets.PAT }}@github.jp.klab.com/zhang-m/migration-test.git"
           source_branch: "main"
+          destination_repo: "zh-ml/migration"
           destination_branch: "main"
-          github_token: "${{ secrets.SELF_TOKEN }}"
-        # env:
-        #   SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} # optional
+          source_ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} # optional, will override `SSH_PRIVATE_KEY`
+          destination_ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} # optional, will override `SSH_PRIVATE_KEY`
