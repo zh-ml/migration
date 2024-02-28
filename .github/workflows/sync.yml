@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: PAT
-
+    timeout-minutes: 15
     steps:
       - name: git-sync
         uses: wei/git-sync@v3
