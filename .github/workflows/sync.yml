@@ -13,7 +13,7 @@ jobs:
     timeout-minutes: 15
     steps:
       - name: git-sync
-        if: $GITHUB_SERVER_URL == 'https://github.com'
+        if: "$GITHUB_SERVER_URL" == 'https://github.com'
         uses: wei/git-sync@v3
         with:
           # source_repo: "https://zhang-m:${{ secrets.PAT }}@github.jp.klab.com/zhang-m/migration-test.git"
