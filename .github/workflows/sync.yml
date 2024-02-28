@@ -3,7 +3,7 @@ name: GIT-SYNC
 on:
   push:
     branchs:
-      - "feature/*"
+      - "develop"
 
 jobs:
   syncGHtoGHE:
