@@ -4,7 +4,7 @@ name: CI
 
 # Controls when the workflow will run
 on:
-  workflow_dispatch:
+  # workflow_dispatch:
   # schedule:
   # - cron:  "*/1 * * * *"
   push:
@@ -39,6 +39,7 @@ jobs:
       #   #   SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: git-sync
+        if: github.event_name == 'push'
         uses: wei/git-sync@v3
         with:
           # source_repo: "https://zhang-m:${{ secrets.PAT }}@github.jp.klab.com/zhang-m/migration-test.git"
