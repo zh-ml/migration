@@ -2,7 +2,7 @@ name: GIT-SYNC
 
 on:
   push:
-    branchs:
+    branches:
       - develop
 
 jobs:
