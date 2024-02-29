@@ -7,7 +7,7 @@ on:
   pull_request:
     types: [ opened, edited, reopened ]
     branches:
-      - feature/*
+      - main
 
 jobs:
   syncGHtoGHE:
@@ -47,7 +47,8 @@ jobs:
           echo "" >> $GITHUB_ENV
           echo "${{ github.event.pull_request.body }}" >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
-          cat $GITHUB_ENV
+          echo ">>>add<<<"
+          echo $GITHUB_REF
       - name: pull-request
         uses: repo-sync/pull-request@v2
         with:
