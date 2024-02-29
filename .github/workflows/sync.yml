@@ -50,7 +50,8 @@ jobs:
       - name: pull-request
         uses: repo-sync/pull-request@v2
         with:
-          source_branch: "${{ github.event.pull_request.head.ref }}"
+          # source_branch: "${{ github.event.pull_request.head.ref }}"
+          source_branch: develop
           destination_branch: main
           github_token: ${{ secrets.SELF_GITHUB_TOKEN1 }}
           pr_label: beta
