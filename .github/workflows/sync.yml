@@ -47,6 +47,7 @@ jobs:
           echo "" >> $GITHUB_ENV
           echo "${{ github.event.pull_request.body }}" >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
+          echo $GITHUB_ENV
       - name: pull-request
         uses: repo-sync/pull-request@v2
         with:
