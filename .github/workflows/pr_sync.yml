@@ -36,4 +36,4 @@ jobs:
           pr_label: beta
           pr_title: "${{ github.event.pull_request.title }}"
           pr_body : |
-            ${{ env.PR_BODY }} 
+            ${{ env.PR_BODY }}
