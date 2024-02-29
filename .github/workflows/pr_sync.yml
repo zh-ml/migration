@@ -26,6 +26,8 @@ jobs:
           echo 'EOF' >> $GITHUB_ENV
           echo ">>>add<<<"
           echo $GITHUB_REF
+          echo ${{ github.event.pull_request.base.ref }}
+          echo ${{ github.event.pull_request.head.ref }}
       - name: pull-request
         uses: repo-sync/pull-request@v2
         with:
