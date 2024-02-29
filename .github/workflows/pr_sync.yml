@@ -1,0 +1,39 @@
+name: PR-SYNC
+
+on:
+  pull_request:
+    types: [ opened, edited, reopened ]
+    branches:
+      - main
+
+jobs:
+  action:
+    runs-on: ubuntu-latest
+    environment:
+      name: PAT
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set variables
+        if: github.server_url == 'https://github.com'
+        run: |
+          echo 'PR_BODY<<EOF' >> $GITHUB_ENV
+          echo "the same as #${{ github.event.pull_request.number }}" >> $GITHUB_ENV
+          echo "" >> $GITHUB_ENV
+          echo "---" >> $GITHUB_ENV
+          echo "" >> $GITHUB_ENV
+          echo "${{ github.event.pull_request.body }}" >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
+          echo ">>>add<<<"
+          echo $GITHUB_REF
+      - name: pull-request
+        uses: repo-sync/pull-request@v2
+        with:
+          # source_branch: "${{ github.event.pull_request.head.ref }}"
+          source_branch: develop
+          destination_branch: test
+          github_token: ${{ secrets.SELF_GITHUB_TOKEN1 }}
+          pr_label: beta
+          pr_title: "${{ github.event.pull_request.title }}"
+          pr_body : |
+            ${{ env.PR_BODY }} 
