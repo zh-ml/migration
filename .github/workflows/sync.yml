@@ -51,7 +51,7 @@ jobs:
         with:
           source_branch: "${{ github.event.pull_request.head.ref }}"
           destination_branch: main
-          github_token: ${{ secrets.SELF_GITHUB_TOKEN }}
+          github_token: ${{ secrets.SELF_GITHUB_TOKEN1 }}
           pr_label: beta
           pr_title: "${{ github.event.pull_request.title }}"
           pr_body : |
