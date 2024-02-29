@@ -1,4 +1,4 @@
-name: GIT-SYNC
+name: PR-SYNC
 
 on:
   pull_request:
