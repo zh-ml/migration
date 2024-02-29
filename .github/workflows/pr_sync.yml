@@ -1,5 +1,6 @@
 name: PR-SYNC
 
+
 on:
   pull_request:
     types: [ opened, edited, reopened ]
