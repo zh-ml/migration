@@ -1,6 +1,6 @@
-# name: GIT-SYNC
+name: GIT-SYNC
 
-# on:
+on:
 #   push:
 #     branches:
 #       - feature/*
