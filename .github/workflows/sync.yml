@@ -3,7 +3,7 @@ name: GIT-SYNC
 on:
   push:
     branches:
-      - feature*
+      - feature/*
   # pull_request:
   #   types: [ opened ]
   #   branches:
