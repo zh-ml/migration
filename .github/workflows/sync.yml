@@ -4,10 +4,10 @@ on:
   push:
     branches:
       - feature/*
-  # pull_request:
-  #   types: [ opened ]
-  #   branches:
-  #     - feature*
+  pull_request:
+    types: [ opened ]
+    branches:
+      - feature/*
 
 jobs:
   syncGHtoGHE:
@@ -30,29 +30,29 @@ jobs:
           # source_ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} # optional, will override `SSH_PRIVATE_KEY`
           # destination_ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} # optional, will override `SSH_PRIVATE_KEY`
   
-  # action:
-  #   runs-on: ubuntu-latest
-  #   environment:
-  #     name: PAT
-  #   timeout-minutes: 15
-  #   steps:
-  #     - name: Set variables
-  #       if: github.server_url == 'https://github.com'
-  #       run: |
-  #         echo 'PR_BODY<<EOF' >> $GITHUB_ENV
-  #         echo "the same as #${{ github.event.pull_request.number }}" >> $GITHUB_ENV
-  #         echo "" >> $GITHUB_ENV
-  #         echo "---" >> $GITHUB_ENV
-  #         echo "" >> $GITHUB_ENV
-  #         echo "${{ github.event.pull_request.body }}" >> $GITHUB_ENV
-  #         echo 'EOF' >> $GITHUB_ENV
-  #     - name: pull-request
-  #       uses: repo-sync/pull-request@v2
-  #       with:
-  #         source_branch: "${{ github.event.pull_request.head.ref }}"
-  #         destination_branch: main
-  #         github_token: ${{ secrets.SELF_GITHUB_TOKEN }}
-  #         pr_label: beta
-  #         pr_title: "${{ github.event.pull_request.title }}"
-  #         pr_body : |
-  #           ${{ env.PR_BODY }}
+  action:
+    runs-on: ubuntu-latest
+    environment:
+      name: PAT
+    timeout-minutes: 15
+    steps:
+      - name: Set variables
+        if: github.server_url == 'https://github.com'
+        run: |
+          echo 'PR_BODY<<EOF' >> $GITHUB_ENV
+          echo "the same as #${{ github.event.pull_request.number }}" >> $GITHUB_ENV
+          echo "" >> $GITHUB_ENV
+          echo "---" >> $GITHUB_ENV
+          echo "" >> $GITHUB_ENV
+          echo "${{ github.event.pull_request.body }}" >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
+      - name: pull-request
+        uses: repo-sync/pull-request@v2
+        with:
+          source_branch: "${{ github.event.pull_request.head.ref }}"
+          destination_branch: main
+          github_token: ${{ secrets.SELF_GITHUB_TOKEN }}
+          pr_label: beta
+          pr_title: "${{ github.event.pull_request.title }}"
+          pr_body : |
+            ${{ env.PR_BODY }}
