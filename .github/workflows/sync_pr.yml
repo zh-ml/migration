@@ -1,5 +1,7 @@
 name: PR-SYNC
-
+permissions:
+  contents: read
+  pull-requests: write
 on:
   pull_request:
     types: [ opened, edited, reopened ]
