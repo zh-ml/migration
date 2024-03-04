@@ -25,7 +25,7 @@ jobs:
           # SOURCE_REPO: "https://github.com/BLS-TOM/tom-client-server"
           # REMOTE_REPO: "https://github.jp.klab.com/ipgamefi/tom-client-server"
           SOURCE_TOKEN: ${{ secrets.SELF_GITHUB_TOKEN1 }}
-          REMOTE_TOKEN: ${{ secrets.REMOTE_GITHUB_TOKEN }}
+          REMOTE_TOKEN: ${{ secrets.REMOTE_TOKEN }}
           SOURCE_REPO: "https://github.com/zh-ml/migration"
           REMOTE_REPO:  "https://github.jp.klab.com/zhang-m/migration-test"
           BASE_BRANCH: ${{ github.event.pull_request.base.ref }}
