@@ -47,6 +47,9 @@ sync_pr() {
     echo "sync PR to enterprise..."
 }
 
+echo $SOURCE_TOKEN $REMOTE_TOKEN
+echo $SOURCE_REPO $REMOTE_REPO
+echo $BASE_BRANCH $HEAD_BRANCH
 check_params
 auth
 sync_pr 
