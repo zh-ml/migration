@@ -14,7 +14,7 @@ jobs:
       name: PAT
     timeout-minutes: 15
     steps:
-      # - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
       - name: Set variables
         if: github.server_url == 'https://github.com'
         shell: bash
