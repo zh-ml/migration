@@ -5,6 +5,7 @@ on:
     types: [ opened, reopened ]
     branches:
       - main
+      - feature**
 
 jobs:
   action:
@@ -18,13 +19,13 @@ jobs:
         if: github.server_url == 'https://github.com'
         shell: bash
         env:
-          # SOURCE_TOKEN: ${{ secret.SOURCE_TOKEN }}
-          # REMOTE_TOKEN: ${{ secret.REMOTE_TOKEN }}
+          # SOURCE_TOKEN: ${{ secrets.SOURCE_TOKEN }}
+          # REMOTE_TOKEN: ${{ secrets.REMOTE_TOKEN }}
           # SOURCE_REPO: ${{ github.server_url }}/${{ github.repository }}
           # SOURCE_REPO: "https://github.com/BLS-TOM/tom-client-server"
           # REMOTE_REPO: "https://github.jp.klab.com/ipgamefi/tom-client-server"
-          SOURCE_TOKEN: ${{ secret.SELF_GITHUB_TOKEN1 }}
-          REMOTE_TOKEN: ${{ secret.REMOTE_GITHUB_TOKEN }}
+          SOURCE_TOKEN: ${{ secrets.SELF_GITHUB_TOKEN1 }}
+          REMOTE_TOKEN: ${{ secrets.REMOTE_GITHUB_TOKEN }}
           SOURCE_REPO: "https://github.com/zh-ml/migration"
           REMOTE_REPO:  "https://github.jp.klab.com/zhang-m/migration-test"
           BASE_BRANCH: ${{ github.event.pull_request.base.ref }}
