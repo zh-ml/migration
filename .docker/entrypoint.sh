@@ -23,13 +23,23 @@ auth() {
     gh auth login --hostname github.jp.klab.com  --with-token < ghe.txt
 }
 
+check_remote_pr() {
+    pr_remote=$(gh pr ls -R $REMOTE_REPO -B $BASE_BRANCH -H $HEAD_BRANCH --json title,body)
+    pr_length=$(echo "$pr_remote"|jq length)
+    if [ "$pr_length" -eq 1 ]; then
+        echo "remote PR already exist...!"
+        exit 1
+    fi
+}
+
 sync_pr() {
+    check_remote_pr
     echo "PR from $HEAD_BRANCH to $BASE_BRANCH."
     pr_info=$(gh pr ls -R $SOURCE_REPO -B $BASE_BRANCH -H $HEAD_BRANCH --json title,body)
 
     echo -e "PR: \n$pr_info"
-    pr_title=$(echo pr_info|jq -r '.[0].title')
-    pr_body=$(echo pr_info|jq -r '.[0].body')
+    pr_title=$(echo "$pr_info"|jq -r '.[0].title')
+    pr_body=$(echo "$pr_info"|jq -r '.[0].body')
 
     echo "sync PR from $SOURCE_REPO to $REMOTE_REPO."
     gh pr create -R $REMOTE_REPO -B $BASE_BRANCH -H $HEAD_BRANCH --title "$pr_title" --body "$pr_body"

@@ -2,7 +2,7 @@ name: PR-SYNC
 
 on:
   pull_request:
-    types: [ opened, edited, reopened ]
+    types: [ opened, reopened ]
     branches:
       - main
 
@@ -13,27 +13,32 @@ jobs:
       name: PAT
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v3
+      # - uses: actions/checkout@v3
       - name: Set variables
         if: github.server_url == 'https://github.com'
+        shell: bash
+        env:
+          # SOURCE_TOKEN: ${{ secret.SOURCE_TOKEN }}
+          # REMOTE_TOKEN: ${{ secret.REMOTE_TOKEN }}
+          # SOURCE_REPO: ${{ github.server_url }}/${{ github.repository }}
+          # SOURCE_REPO: "https://github.com/BLS-TOM/tom-client-server"
+          # REMOTE_REPO: "https://github.jp.klab.com/ipgamefi/tom-client-server"
+          SOURCE_TOKEN: ${{ secret.SELF_GITHUB_TOKEN1 }}
+          REMOTE_TOKEN: ${{ secret.REMOTE_GITHUB_TOKEN }}
+          SOURCE_REPO: "https://github.com/zh-ml/migration"
+          REMOTE_REPO:  "https://github.jp.klab.com/zhang-m/migration-test"
+          BASE_BRANCH: ${{ github.event.pull_request.base.ref }}
+          HEAD_BRANCH: ${{ github.event.pull_request.head.ref }}
         run: |
-          echo 'PR_BODY<<EOF' >> $GITHUB_ENV
-          echo "the same as #${{ github.event.pull_request.number }}" >> $GITHUB_ENV
-          echo "" >> $GITHUB_ENV
-          echo "---" >> $GITHUB_ENV
-          echo "" >> $GITHUB_ENV
-          echo "${{ github.event.pull_request.body }}" >> $GITHUB_ENV
-          echo 'EOF' >> $GITHUB_ENV
-          echo ">>>add<<<"
-          echo $GITHUB_REF
-      - name: pull-request
-        uses: repo-sync/pull-request@v2
-        with:
-          # source_branch: "${{ github.event.pull_request.head.ref }}"
-          source_branch: develop
-          destination_branch: test
-          github_token: ${{ secrets.SELF_GITHUB_TOKEN1 }}
-          pr_label: beta
-          pr_title: "${{ github.event.pull_request.title }}"
-          pr_body : |
-            ${{ env.PR_BODY }}
+          bash .docker/entrypoint.sh 
+      # - name: pull-request
+      #   uses: repo-sync/pull-request@v2
+      #   with:
+      #     # source_branch: "${{ github.event.pull_request.head.ref }}"
+      #     source_branch: develop
+      #     destination_branch: test
+      #     github_token: ${{ secrets.SELF_GITHUB_TOKEN1 }}
+      #     pr_label: beta
+      #     pr_title: "${{ github.event.pull_request.title }}"
+      #     pr_body : |
+      #       ${{ env.PR_BODY }}
